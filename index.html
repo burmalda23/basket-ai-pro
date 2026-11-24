@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101522">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="BASKET AI">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>BASKET AI PRO</title>
+<style>
+:root{--bg:#0b101a;--panel:#151d2b;--panel2:#1b2638;--text:#f5f7fb;--muted:#9eabc0;--orange:#ff8a24;--line:#2b384d;--green:#56d69a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#1a2940 0,#0b101a 48%);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+header{padding:22px 18px 14px;position:sticky;top:0;background:#0b101aeF;backdrop-filter:blur(16px);z-index:5;border-bottom:1px solid #263247}
+.brand{display:flex;align-items:center;gap:11px}.brand img{width:42px;height:42px;border-radius:13px}.brand h1{font-size:18px;letter-spacing:1px;margin:0}.brand small{color:var(--muted);display:block;margin-top:3px;font-size:11px}
+main{max-width:760px;margin:auto;padding:16px 14px 100px}.page{display:none}.page.active{display:block}
+h2{font-size:23px;margin:8px 0 14px}h3{font-size:16px;margin:0 0 8px}.muted{color:var(--muted)}.tiny{font-size:12px;color:var(--muted)}
+.card{background:linear-gradient(145deg,var(--panel),#111a28);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0;box-shadow:0 8px 26px #0002}
+.hero{background:linear-gradient(130deg,#45280f,#1a2435 70%);border-color:#805022}.row{display:flex;align-items:center;justify-content:space-between;gap:12px}.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{background:#0e1725;border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center}.stat strong{font-size:21px;display:block}.stat span{font-size:11px;color:var(--muted)}
+.progress{height:9px;background:#273246;border-radius:20px;overflow:hidden;margin:10px 0}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--orange),#ffd166);width:0%}
+button,.btn{border:0;border-radius:13px;background:var(--orange);color:#1c140c;font-weight:800;padding:12px 15px;font-size:14px;cursor:pointer}button.secondary{background:#26344a;color:var(--text);border:1px solid #3b4b64}button.ghost{background:transparent;color:var(--orange);border:1px solid #87501f}button.danger{background:#512a32;color:#ffdce0}button:disabled{opacity:.45}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.nav{position:fixed;bottom:0;left:0;right:0;z-index:8;background:#0d1420f5;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 4px calc(8px + env(safe-area-inset-bottom));backdrop-filter:blur(18px)}.nav button{background:transparent;color:var(--muted);padding:8px 5px;font-size:10px;flex:1;border-radius:10px}.nav button.active{color:var(--orange);background:#302316}.nav b{display:block;font-size:18px;margin-bottom:3px}
+.exercise{border-top:1px solid var(--line);padding:12px 0}.exercise label{display:flex;gap:10px;align-items:flex-start;line-height:1.35}.exercise input{accent-color:var(--orange);width:19px;height:19px;flex-shrink:0}
+.pill{display:inline-block;border:1px solid #5a472f;color:#ffbd78;background:#392819;padding:5px 9px;border-radius:20px;font-size:11px;margin:2px}
+input,select{background:#0d1725;color:var(--text);border:1px solid #34435a;border-radius:11px;padding:12px;width:100%;font-size:15px;margin:5px 0 10px}
+video{width:100%;border-radius:14px;background:#05080d;max-height:340px;object-fit:cover}.shotlog{max-height:210px;overflow:auto}.shotlog div{padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+a{color:#ffb66c;text-decoration:none}.tilegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tile{background:#172235;border:1px solid var(--line);border-radius:15px;padding:14px;min-height:95px;text-align:left;color:var(--text)}.tile strong{display:block;margin:6px 0}.notice{font-size:12px;color:#c2ccda;background:#202c3d;border-radius:12px;padding:11px;line-height:1.45}
+footer{text-align:center;color:#718097;font-size:11px;padding:20px}
+</style>
+</head>
+<body>
+<header><div class="brand"><img src="icon-192.png" alt=""><div><h1>BASKET AI PRO</h1><small>ТВОЙ ПЕРСОНАЛЬНЫЙ БАСКЕТБОЛЬНЫЙ ТРЕКЕР</small></div></div></header>
+<main>
+<section class="page active" id="home">
+ <div class="card hero"><div class="row"><div><span class="pill">PLAYER DEVELOPMENT</span><h2>Привет, форвард! 🏀</h2><div class="muted">Строй универсальную игру — шаг за шагом.</div></div><div style="font-size:48px">🏀</div></div>
+ <div class="row" style="margin-top:16px"><div><div class="tiny">ТЕКУЩИЙ УРОВЕНЬ</div><strong id="level" style="font-size:30px">1</strong></div><div style="text-align:right"><div class="tiny">ОПЫТ</div><strong id="xp" style="font-size:25px">0 XP</strong></div></div>
+ <div class="progress"><i id="xpbar"></i></div><div class="tiny" id="xpnext">0 / 100 XP до следующего уровня</div></div>
+ <div class="statgrid"><div class="stat"><strong id="homeAccuracy">—</strong><span>ТОЧНОСТЬ</span></div><div class="stat"><strong id="homeShots">0</strong><span>БРОСКИ</span></div><div class="stat"><strong id="homeWorkouts">0</strong><span>ТРЕНИРОВКИ</span></div></div>
+ <div class="card"><div class="row"><h3>🎯 Миссия дня</h3><span class="pill">+25 XP</span></div><p id="missionText">Сделай 5 минут контролируемого ведения слабой рукой.</p><button onclick="completeMission()">Миссия выполнена</button></div>
+ <h3 style="margin:20px 2px 10px">Быстрый старт</h3><div class="tilegrid">
+ <button class="tile" onclick="showPage('training')">⚡<strong>Тренировка</strong><span class="tiny">Упражнения и таймер</span></button>
+ <button class="tile" onclick="showPage('tracker')">🎥<strong>Трекер бросков</strong><span class="tiny">Камера и статистика</span></button>
+ <button class="tile" onclick="showPage('academy')">🏆<strong>Pro Academy</strong><span class="tiny">Стиль профи</span></button>
+ <button class="tile" onclick="showPage('stats')">📊<strong>Моя статистика</strong><span class="tiny">Прогресс и история</span></button>
+ </div>
+ <div class="card"><h3>Совет тренера</h3><p class="muted">Как форвард, развивай обе стороны площадки. Сначала качество движения и контроль, затем скорость. Не гонись за количеством повторений ценой техники.</p></div>
+</section>
+<section class="page" id="training">
+ <h2>Тренировочный центр</h2><p class="muted">Выбери блок, выполни упражнения и отметь их. XP начисляется за завершённую тренировку.</p>
+ <div id="trainingList"></div>
+ <div class="card"><h3>⏱ Таймер упражнения</h3><div class="row"><strong id="timerDisplay" style="font-size:38px;font-variant-numeric:tabular-nums">00:30</strong><div class="actions"><button class="secondary" onclick="setTimer(30)">30с</button><button class="secondary" onclick="setTimer(60)">60с</button><button class="secondary" onclick="setTimer(90)">90с</button></div></div><div class="actions"><button onclick="startTimer()">Старт</button><button class="secondary" onclick="pauseTimer()">Пауза</button><button class="ghost" onclick="resetTimer()">Сброс</button></div></div>
+ <div class="card"><h3>Пример недели</h3><p class="muted">Пн — Ball Control · Вт — секция/восстановление · Ср — Shooting · Чт — отдых или лёгкая техника · Пт — Attack the Rim · Сб — секция/игра · Вс — отдых.</p></div>
+</section>
+<section class="page" id="academy">
+ <h2>Pro Academy</h2><p class="muted">Бери отдельные навыки у звёзд, но формируй собственный стиль.</p>
+ <div class="card"><div class="row"><h3>👑 LeBron James</h3><span class="pill">Универсальный форвард</span></div><p class="muted">Сильное принятие решений, передачи, силовой проход, видение площадки.</p><b>Задание:</b> 10 проходов с завершением и 10 передач в цель каждой рукой.</div>
+ <div class="card"><div class="row"><h3>🎯 Jayson Tatum</h3><span class="pill">Бросок и footwork</span></div><p class="muted">Работа ног, остановки, создание пространства и бросок после ведения.</p><b>Задание:</b> 5 точек средней дистанции, по 5 бросков с каждой.</div>
+ <div class="card"><div class="row"><h3>🛡 Kawhi Leonard</h3><span class="pill">Защита и контроль</span></div><p class="muted">Баланс, позиционная защита, большие кисти и спокойный контроль мяча.</p><b>Задание:</b> 3 подхода по 30 секунд защитных перемещений с отдыхом.</div>
+ <div class="card"><h3>Видео-уроки на русском</h3><p class="tiny">Откроется поиск YouTube по теме — выбирай обучающие ролики от тренеров.</p>
+ <div class="exercise"><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=баскетбол+техника+ведения+мяча+уроки">▶ Техника ведения мяча</a></div>
+ <div class="exercise"><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=баскетбол+ведение+слабой+рукой+тренировка">▶ Слабая рука</a></div>
+ <div class="exercise"><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=баскетбол+техника+броска+обучение">▶ Техника броска</a></div>
+ <div class="exercise"><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=баскетбол+проход+под+кольцо+обучение">▶ Проходы под кольцо</a></div>
+ <div class="exercise"><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=баскетбол+защитная+стойка+перемещения">▶ Защита и перемещения</a></div>
+ <div class="exercise"><a target="_blank" rel="noopener" href="https://www.youtube.com/results?search_query=баскетбол+баскетбольный+IQ+принятие+решений">▶ Basketball IQ</a></div></div>
+</section>
+<section class="page" id="tracker">
+ <h2>Трекер бросков</h2><div class="card"><h3>Камера</h3><video id="camera" playsinline autoplay muted></video><div class="actions"><button onclick="startCamera()">Включить камеру</button><button class="secondary" onclick="stopCamera()">Выключить</button></div><p class="notice">Камера показывает площадку, но пока не распознаёт мяч и попадание автоматически. Отмечай результат вручную после каждого броска.</p></div>
+ <div class="card"><h3>Записать бросок</h3><div class="row"><div><div class="tiny">ПОПАДАНИЯ</div><strong id="madeCount" style="font-size:30px">0</strong></div><div><div class="tiny">ПОПЫТКИ</div><strong id="attemptCount" style="font-size:30px">0</strong></div><div><div class="tiny">ТОЧНОСТЬ</div><strong id="accuracy" style="font-size:30px">—</strong></div></div><div class="actions"><button onclick="recordShot(true)">✓ Попадание</button><button class="danger" onclick="recordShot(false)">✕ Промах</button></div></div>
+ <div class="card"><div class="row"><h3>Последние броски</h3><button class="ghost" onclick="clearShots()">Очистить</button></div><div class="shotlog" id="shotLog"><p class="muted">Пока бросков нет.</p></div></div>
+</section>
+<section class="page" id="stats">
+ <h2>Моя статистика</h2><div class="statgrid"><div class="stat"><strong id="statShots">0</strong><span>БРОСКИ</span></div><div class="stat"><strong id="statMade">0</strong><span>ПОПАДАНИЯ</span></div><div class="stat"><strong id="statAcc">—</strong><span>ТОЧНОСТЬ</span></div></div>
+ <div class="card"><h3>Тренировочная форма</h3><div class="row"><span class="muted">Завершено тренировок</span><strong id="statWorkouts">0</strong></div><div class="row"><span class="muted">Всего опыта</span><strong id="statXP">0 XP</strong></div><div class="row"><span class="muted">Уровень</span><strong id="statLevel">1</strong></div></div>
+ <div class="card"><h3>🏅 Достижения</h3><div id="achievements" class="muted">Первый шаг — начать тренировку!</div></div>
+ <div class="card"><h3>Резервная копия</h3><p class="tiny">Сохрани статистику в файл, чтобы не потерять её при очистке данных Safari.</p><div class="actions"><button onclick="exportData()">Экспорт JSON</button><button class="secondary" onclick="exportCSV()">Экспорт CSV</button><button class="ghost" onclick="document.getElementById('importFile').click()">Импорт JSON</button><input id="importFile" type="file" accept="application/json" style="display:none" onchange="importData(event)"></div></div>
+</section>
+<section class="page" id="profile">
+ <h2>Профиль игрока</h2><div class="card"><label class="tiny">ИМЯ ИГРОКА</label><input id="playerName" placeholder="Например, Forward"><label class="tiny">ПОЗИЦИЯ</label><select id="position"><option>Small Forward (SF)</option><option>Shooting Guard (SG)</option><option>Point Guard (PG)</option><option>Power Forward (PF)</option><option>Center (C)</option></select><label class="tiny">ВЕДУЩАЯ РУКА</label><select id="hand"><option>Правая</option><option>Левая</option></select><label class="tiny">ГЛАВНАЯ ЦЕЛЬ</label><select id="goal"><option>Универсальный форвард</option><option>Сильная слабая рука</option><option>Стабильный бросок</option><option>Скорость и проходы</option><option>Защита и Basketball IQ</option></select><button onclick="saveProfile()">Сохранить профиль</button></div>
+ <div class="card"><h3>Безопасная прокачка</h3><p class="muted">Перед тренировкой разомнись 5–10 минут. Между интенсивными днями оставляй восстановление. Если появляется боль или головокружение — остановись и скажи взрослому/тренеру. Техника важнее рекордов.</p></div>
+</section>
+<footer>BASKET AI PRO · Твой прогресс — твоя игра.</footer>
+</main>
+<nav class="nav">
+<button class="active" data-page="home" onclick="showPage('home')"><b>⌂</b>Главная</button>
+<button data-page="training" onclick="showPage('training')"><b>⚡</b>Тренировки</button>
+<button data-page="tracker" onclick="showPage('tracker')"><b>🎥</b>Броски</button>
+<button data-page="academy" onclick="showPage('academy')"><b>🏆</b>Академия</button>
+<button data-page="stats" onclick="showPage('stats')"><b>📊</b>Статистика</button>
+<button data-page="profile" onclick="showPage('profile')"><b>👤</b>Профиль</button>
+</nav>
+<script>
+const programs=[
+{name:"Ball Control",icon:"🏀",desc:"Контроль мяча и слабая рука",items:["2 мин — низкое ведение правой рукой","2 мин — низкое ведение левой рукой","3 × 30 сек — чередование рук перед собой","2 мин — ведение с поднятой головой","1 мин — ускорение на месте с контролем"]},
+{name:"Shooting Master",icon:"🎯",desc:"Механика и стабильность броска",items:["20 близких бросков с правильной техникой","5 точек — по 5 бросков с каждой","10 бросков после остановки в два шага","10 штрафных с одинаковой рутиной"]},
+{name:"Attack the Rim",icon:"🚀",desc:"Первый шаг и завершение",items:["3 × 20 сек — работа ног без мяча","10 проходов с правой стороны","10 проходов с левой стороны","10 завершений после двух шагов"]},
+{name:"Defense Skills",icon:"🛡️",desc:"Стойка, баланс и перемещения",items:["3 × 20 сек — защитная стойка","3 × 20 сек — боковые перемещения","10 контролируемых closeout без прыжка в соперника","1 мин — работа ног и баланс"]},
+{name:"Basketball IQ",icon:"🧠",desc:"Чтение игры и решения",items:["Посмотри 5 минут игры и следи за spacing","Найди 3 момента для передачи вместо броска","Назови варианты решения при closeout","Потренируй сканирование площадки перед приёмом"]},
+{name:"Complete Forward",icon:"👑",desc:"Смешанная тренировка форварда",items:["2 мин — ведение слабой рукой","10 бросков после ведения","10 проходов в обе стороны","3 × 20 сек — защитные перемещения","5 минут — свободная работа над слабым навыком"]}
+];
+let data={xp:0,workouts:0,shots:[],done:{},profile:{name:"",position:"Small Forward (SF)",hand:"Правая",goal:"Универсальный форвард"},missionDay:""};
+function load(){try{let x=JSON.parse(localStorage.getItem("basketAIPro")||"null");if(x)data={...data,...x}}catch(e){}}
+function save(){localStorage.setItem("basketAIPro",JSON.stringify(data));render()}
+function level(){return Math.floor(data.xp/100)+1}
+function acc(){return data.shots.length?Math.round(data.shots.filter(s=>s.made).length/data.shots.length*100):null}
+function showPage(id){document.querySelectorAll(".page").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll(".nav button").forEach(b=>b.classList.toggle("active",b.dataset.page===id));window.scrollTo(0,0)}
+function render(){let a=acc(),made=data.shots.filter(s=>s.made).length;document.getElementById("level").textContent=level();document.getElementById("xp").textContent=data.xp+" XP";document.getElementById("xpbar").style.width=(data.xp%100)+"%";document.getElementById("xpnext").textContent=(data.xp%100)+" / 100 XP до следующего уровня";document.getElementById("homeAccuracy").textContent=a===null?"—":a+"%";document.getElementById("homeShots").textContent=data.shots.length;document.getElementById("homeWorkouts").textContent=data.workouts;
+ document.getElementById("madeCount").textContent=made;document.getElementById("attemptCount").textContent=data.shots.length;document.getElementById("accuracy").textContent=a===null?"—":a+"%";document.getElementById("statShots").textContent=data.shots.length;document.getElementById("statMade").textContent=made;document.getElementById("statAcc").textContent=a===null?"—":a+"%";document.getElementById("statWorkouts").textContent=data.workouts;document.getElementById("statXP").textContent=data.xp+" XP";document.getElementById("statLevel").textContent=level();
+ document.getElementById("shotLog").innerHTML=data.shots.length?data.shots.slice(-25).reverse().map(s=>`<div>${s.made?"<span style='color:var(--green)'>ПОПАДАНИЕ</span>":"<span style='color:#ff8585'>ПРОМАХ</span>"} <span class='tiny'>${new Date(s.time).toLocaleString("ru-RU")}</span></div>`).join(""):"<p class='muted'>Пока бросков нет.</p>";
+ let ach=[];if(data.xp>=25)ach.push("🔥 Первый XP");if(data.workouts>=1)ach.push("💪 Первая тренировка");if(data.shots.length>=10)ach.push("🎯 10 бросков");if(data.shots.length>=50)ach.push("🏀 50 бросков");if(level()>=5)ach.push("⭐ Уровень 5");document.getElementById("achievements").textContent=ach.join(" · ")||"Первый шаг — начать тренировку!";
+ document.getElementById("playerName").value=data.profile.name||"";document.getElementById("position").value=data.profile.position;document.getElementById("hand").value=data.profile.hand;document.getElementById("goal").value=data.profile.goal;
+}
+function buildPrograms(){document.getElementById("trainingList").innerHTML=programs.map((p,i)=>{let key="p"+i,done=data.done[key]||[];return `<div class="card"><div class="row"><h3>${p.icon} ${p.name}</h3><span class="pill">${done.length}/${p.items.length}</span></div><p class="tiny">${p.desc}</p>${p.items.map((item,j)=>`<div class="exercise"><label><input type="checkbox" ${done.includes(j)?"checked":""} onchange="toggleExercise(${i},${j},this.checked)"><span>${item}</span></label></div>`).join("")}<div class="progress"><i style="width:${done.length/p.items.length*100}%"></i></div><button ${done.length===p.items.length?"disabled":""} onclick="finishWorkout(${i})">${done.length===p.items.length?"Выполнено ✓":"Завершить блок · +25 XP"}</button></div>`}).join("")}
+function toggleExercise(i,j,on){let k="p"+i;data.done[k]=data.done[k]||[];data.done[k]=on?[...new Set([...data.done[k],j])]:data.done[k].filter(x=>x!==j);save();buildPrograms()}
+function finishWorkout(i){let k="p"+i;if((data.done[k]||[]).length!==programs[i].items.length)return;data.xp+=25;data.workouts++;data.done[k]=[];save();buildPrograms();alert("Отличная работа! +25 XP 🏀")}
+function recordShot(made){data.shots.push({made,time:Date.now()});save()}
+function clearShots(){if(confirm("Удалить всю историю бросков?")){data.shots=[];save()}}
+function completeMission(){let day=new Date().toDateString();if(data.missionDay===day){alert("Миссия на сегодня уже выполнена!");return}data.missionDay=day;data.xp+=25;save();alert("+25 XP! Отличная работа.")}
+function saveProfile(){data.profile={name:document.getElementById("playerName").value,position:document.getElementById("position").value,hand:document.getElementById("hand").value,goal:document.getElementById("goal").value};save();alert("Профиль сохранён")}
+let timer=30,remaining=30,tick=null;function fmt(n){return "00:"+String(n).padStart(2,"0")}function setTimer(n){pauseTimer();timer=n;remaining=n;document.getElementById("timerDisplay").textContent=fmt(n)}function startTimer(){if(tick)return;tick=setInterval(()=>{remaining--;document.getElementById("timerDisplay").textContent=fmt(remaining);if(remaining<=0){pauseTimer();if(navigator.vibrate)navigator.vibrate([150,80,150]);alert("Время! Отдохни и оцени технику.")}},1000)}function pauseTimer(){if(tick){clearInterval(tick);tick=null}}function resetTimer(){pauseTimer();remaining=timer;document.getElementById("timerDisplay").textContent=fmt(remaining)}
+let stream=null;async function startCamera(){try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"environment"},audio:false});document.getElementById("camera").srcObject=stream}catch(e){alert("Не удалось включить камеру. Проверь разрешение и открой сайт по HTTPS.")}}function stopCamera(){if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;document.getElementById("camera").srcObject=null}
+function download(name,content,type){let blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
+function exportData(){download("basket-ai-backup.json",JSON.stringify(data,null,2),"application/json")}
+function exportCSV(){let rows=[["time","result"],...data.shots.map(s=>[new Date(s.time).toISOString(),s.made?"made":"miss"])];download("basket-ai-shots.csv",rows.map(r=>r.join(",")).join("\n"),"text/csv")}
+function importData(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let x=JSON.parse(r.result);if(!Array.isArray(x.shots)||typeof x.xp!=="number")throw 0;data={...data,...x};save();buildPrograms();alert("Резервная копия загружена")}catch(err){alert("Файл не похож на резервную копию BASKET AI")}};r.readAsText(f)}
+load();buildPrograms();render();
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))window.addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js").catch(()=>{}));
+</script>
+</body></html>
