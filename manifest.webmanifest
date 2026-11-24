@@ -1,12 +1,10 @@
 {
-  "name": "BASKET AI PRO",
+  "name": "BASKET AI PRO 4.0 — AI Coach",
   "short_name": "BASKET AI",
-  "start_url": "./",
-  "scope": "./",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0b101a",
-  "theme_color": "#101522",
-  "description": "Персональный баскетбольный тренировочный трекер",
+  "background_color": "#0d0e11",
+  "theme_color": "#101114",
   "icons": [
     {
       "src": "icon-192.png",
